@@ -12,30 +12,30 @@ type CustomerService interface {
 	UpdateCustomer(id string, customer *entity.Customer) error
 	DeleteCustomer(id string) error
 }
-type customerRepositoryImpl struct {
+type customerServiceImpl struct {
 	Repo repository.CustomerRepository
 }
 
 func NewCustomerService(repo repository.CustomerRepository) CustomerService {
-	return &customerRepositoryImpl{repo}
+	return &customerServiceImpl{repo}
 }
 
-func (c *customerRepositoryImpl) CreateCustomer(customer *entity.Customer) error {
+func (c *customerServiceImpl) CreateCustomer(customer *entity.Customer) error {
 	return c.Repo.Create(customer)
 }
 
-func (c *customerRepositoryImpl) GetAllCustomers() ([]entity.Customer, error) {
+func (c *customerServiceImpl) GetAllCustomers() ([]entity.Customer, error) {
 	return c.Repo.GetAll()
 }
 
-func (c *customerRepositoryImpl) GetCustomerByID(id string) (*entity.Customer, error) {
+func (c *customerServiceImpl) GetCustomerByID(id string) (*entity.Customer, error) {
 	return c.Repo.GetByID(id)
 }
 
-func (c *customerRepositoryImpl) UpdateCustomer(id string, customer *entity.Customer) error {
+func (c *customerServiceImpl) UpdateCustomer(id string, customer *entity.Customer) error {
 	return c.Repo.Update(id, customer)
 }
 
-func (c *customerRepositoryImpl) DeleteCustomer(id string) error {
+func (c *customerServiceImpl) DeleteCustomer(id string) error {
 	return c.Repo.Delete(id)
 }

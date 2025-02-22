@@ -21,7 +21,14 @@ func main() {
 	customerService := service.NewCustomerService(customerRepo)
 	customerController := controller.NewCustomerController(customerService)
 
-	routes.SetupRoutes(app, customerController)
+	orderRepo := repository.NewOrderRepository(database.DB)
+	orderService := service.NewOrderService(orderRepo)
+	orderController := controller.NewOrderController(orderService)
+
+	routes.SetupRoutes(
+		app,
+		customerController,
+		orderController)
 
 	err := app.Listen(":8000")
 	if err != nil {
