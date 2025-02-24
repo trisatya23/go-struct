@@ -38,7 +38,7 @@ func (c *customerRepositoryImpl) GetByID(id string) (*entity.Customer, error) {
 }
 
 func (c *customerRepositoryImpl) Update(id string, customer *entity.Customer) error {
-	return c.db.Model(&entity.Customer{}).Where("id = ?", id).Updates(customer).Error
+	return c.db.Model(&entity.Customer{}).Where("customer_id = ?", id).Updates(customer).Error
 }
 
 func (c *customerRepositoryImpl) Delete(id string) error {

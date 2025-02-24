@@ -1,9 +1,11 @@
 package entity
 
+import "time"
+
 type Discount struct {
-	DiscountID  string  `json:"discount_id" gorm:"primaryKey"`
-	Description string  `json:"description"`
-	DiscountPct float64 `json:"discount_pct"`
-	ValidFrom   string  `json:"valid_from"`
-	ValidUntil  string  `json:"valid_until"`
+	DiscountID  string    `json:"discount_id" gorm:"type:char(36);primaryKey"`
+	Description string    `json:"description" gorm:"not null"`
+	DiscountPct float64   `json:"discount_pct" gorm:"not null"`
+	ValidFrom   time.Time `json:"valid_from" gorm:"type:datetime;not null"`
+	ValidUntil  time.Time `json:"valid_until" gorm:"type:datetime;not null"`
 }

@@ -25,10 +25,25 @@ func main() {
 	orderService := service.NewOrderService(orderRepo)
 	orderController := controller.NewOrderController(orderService)
 
+	orderItemRepo := repository.NewOrderItemRepository(database.DB)
+	orderItemService := service.NewOrderItemService(orderItemRepo)
+	orderItemController := controller.NewOrderItemController(orderItemService)
+
+	discountRepo := repository.NewDiscountRepository(database.DB)
+	discountService := service.NewDiscountService(discountRepo)
+	discountController := controller.NewDiscountController(discountService)
+
+	employeeRepo := repository.NewEmployeeRepository(database.DB)
+	employeeService := service.NewEmployeeService(employeeRepo)
+	employeeController := controller.NewEmployeeController(employeeService)
+
 	routes.SetupRoutes(
 		app,
 		customerController,
-		orderController)
+		orderController,
+		orderItemController,
+		discountController,
+		employeeController)
 
 	err := app.Listen(":8000")
 	if err != nil {

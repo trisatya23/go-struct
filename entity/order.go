@@ -3,9 +3,9 @@ package entity
 import "time"
 
 type Order struct {
-	OrderID     string      `json:"order_id" gorm:"primary_key"`
-	CustomerID  string      `json:"customer_id"`
-	OrderDate   time.Time   `json:"order_date"`
-	TotalAmount float64     `json:"total_amount"`
+	OrderID     uint        `json:"order_id" gorm:"primaryKey;autoIncrement"`
+	CustomerID  string      `json:"customer_id" gorm:"type:char(36);not null"`
+	OrderDate   time.Time   `json:"order_date" gorm:"type:datetime;not null"`
+	TotalAmount float64     `json:"total_amount" gorm:"type:decimal(10,2);not null"`
 	OrderItems  []OrderItem `json:"order_items" gorm:"foreignKey:OrderID"`
 }
